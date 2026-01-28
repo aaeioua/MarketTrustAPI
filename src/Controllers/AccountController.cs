@@ -63,6 +63,7 @@ namespace MarketTrustAPI.Controllers
                 return Ok(
                     new NewUserDto
                     {
+                        Id = user.Id,
                         Name = user.UserName,
                         Email = user.Email,
                         Token = _tokenService.CreateToken(user)
@@ -111,6 +112,7 @@ namespace MarketTrustAPI.Controllers
                         return Ok(
                             new NewUserDto
                             {
+                                Id = user.Id,
                                 Name = user.UserName,
                                 Email = user.Email,
                                 Token = _tokenService.CreateToken(user)

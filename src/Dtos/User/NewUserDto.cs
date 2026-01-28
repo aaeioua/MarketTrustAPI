@@ -11,6 +11,11 @@ namespace MarketTrustAPI.Dtos.User
     public class NewUserDto
     {
         /// <summary>
+        /// The ID of the new user.
+        /// </summary>
+        public string Id { get; set; } = string.Empty;
+
+        /// <summary>
         /// The name of the new user.
         /// </summary>
         public string? Name { get; set; }
