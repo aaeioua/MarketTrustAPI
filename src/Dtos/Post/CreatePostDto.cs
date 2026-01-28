@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using MarketTrustAPI.Dtos.PropertyValue;
+using MarketTrustAPI.Models;
 
 namespace MarketTrustAPI.Dtos.Post
 {
@@ -28,5 +29,15 @@ namespace MarketTrustAPI.Dtos.Post
         /// </summary>
         [Required]
         public int CategoryId { get; set; }
+
+        /// <summary>
+        /// The price of the item in the post.
+        /// </summary>
+        public decimal? Price { get; set; }
+
+        /// <summary>
+        /// The currency of the price in the post.
+        /// </summary>
+        public Currency? Currency { get; set; }
     }
 }

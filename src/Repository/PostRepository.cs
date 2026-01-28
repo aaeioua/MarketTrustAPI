@@ -121,6 +121,8 @@ namespace MarketTrustAPI.Repository
             post.Content = updatePostDto.Content ?? post.Content;
             post.LastUpdatedAt = DateTime.Now;
             post.CategoryId = updatePostDto.CategoryId ?? post.CategoryId;
+            post.Price = updatePostDto.Price ?? post.Price;
+            post.Currency = updatePostDto.Currency ?? post.Currency;
 
             await _context.SaveChangesAsync();
 

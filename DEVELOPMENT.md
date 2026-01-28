@@ -31,5 +31,5 @@ dotnet user-secrets set "JWT:SigningKey" "devSigningKey"
 ## CORS
 
 ```sh
-dotnet user-secrets set "AllowedOrigins" "http://localhost:3000"
+dotnet user-secrets set "AllowedOrigins" "http://localhost:5173"
 ```

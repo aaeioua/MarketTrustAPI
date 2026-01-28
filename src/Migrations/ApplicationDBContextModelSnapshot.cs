@@ -63,8 +63,15 @@ namespace MarketTrustAPI.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("Currency")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("LastUpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -80,7 +87,12 @@ namespace MarketTrustAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", t =>
+                        {
+                            t.HasCheckConstraint("CK_Post_Currency_Values", "Currency IS NULL OR Currency IN (1)");
+
+                            t.HasCheckConstraint("CK_Post_Price_NonNegative", "Price IS NULL OR Price >= 0");
+                        });
                 });
 
             modelBuilder.Entity("MarketTrustAPI.Models.Property", b =>
@@ -282,15 +294,15 @@ namespace MarketTrustAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b1dac43b-6489-4520-bc86-50cf98d49cca",
-                            ConcurrencyStamp = "f934c5be-2075-41e8-bc88-35ed0556e91d",
+                            Id = "59da012c-65aa-4ea7-8073-eb5d0799377f",
+                            ConcurrencyStamp = "5dbc2487-f666-4c73-86b7-94d1d5324c59",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "fd1678c0-f787-4c3a-b187-8e03752fe5f6",
-                            ConcurrencyStamp = "63494396-a836-41e6-b540-41a1ea5aadfa",
+                            Id = "f81fd94f-0994-485d-a8e6-2f4a56bded50",
+                            ConcurrencyStamp = "1e11d611-b084-461b-8f61-4ba50150b78d",
                             Name = "User",
                             NormalizedName = "USER"
                         });

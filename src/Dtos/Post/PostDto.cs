@@ -62,5 +62,15 @@ namespace MarketTrustAPI.Dtos.Post
         /// The properties of the post.
         /// </summary>
         public List<PropertyValueDto> PropertyValues { get; set; } = new List<PropertyValueDto>();
+
+        /// <summary>
+        /// The price of the item in the post.
+        /// </summary>
+        public decimal? Price { get; set; }
+
+        /// <summary>
+        /// The currency of the price in the post.
+        /// </summary>
+        public Currency? Currency { get; set; }
     }
 }

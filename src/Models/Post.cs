@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using MarketTrustAPI.SpatialIndexManager;
@@ -63,6 +64,16 @@ namespace MarketTrustAPI.Models
         public List<PropertyValue> PropertyValues { get; set; } = new List<PropertyValue>();
 
         /// <summary>
+        /// The price of the item in the post.
+        /// </summary>
+        public decimal? Price { get; set; }
+
+        /// <summary>
+        /// The currency of the price in the post.
+        /// </summary>
+        public Currency? Currency { get; set; }
+
+        /// <summary>
         /// Gets the geographical location of the author of the post.
         /// </summary>
         /// <returns>The author's location as a <see cref="Point"/>.</returns>
@@ -70,5 +81,13 @@ namespace MarketTrustAPI.Models
         {
             return User.GetLocation();
         }
+    }
+
+    /// <summary>
+    /// Represents the currency of a post's price.
+    /// </summary>
+    public enum Currency
+    {
+        USD = 1
     }
 }

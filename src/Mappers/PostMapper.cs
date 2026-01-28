@@ -20,7 +20,9 @@ namespace MarketTrustAPI.Mappers
                 LastUpdatedAt = post.LastUpdatedAt,
                 UserId = post.UserId,
                 CategoryId = post.CategoryId,
-                PropertyValues = post.PropertyValues.Select(pv => pv.ToPropertyValueDto()).ToList()
+                PropertyValues = post.PropertyValues.Select(pv => pv.ToPropertyValueDto()).ToList(),
+                Price = post.Price,
+                Currency = post.Currency
             };
         }
 
@@ -32,7 +34,9 @@ namespace MarketTrustAPI.Mappers
                 Content = createPostDto.Content,
                 CreatedAt = DateTime.Now,
                 UserId = userId,
-                CategoryId = categoryId
+                CategoryId = categoryId,
+                Price = createPostDto.Price,
+                Currency = createPostDto.Currency
             };
         }
     }

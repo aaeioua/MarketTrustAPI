@@ -128,6 +128,21 @@ namespace MarketTrustAPI.Controllers
                 return BadRequest("Category does not exist");
             }
 
+            if (createPostDto.Price.HasValue ^ createPostDto.Currency.HasValue)
+            {
+                return BadRequest("Both Price and Currency must be provided together");
+            }
+
+            if (createPostDto.Price.HasValue && createPostDto.Price < 0)
+            {
+                return BadRequest("Price cannot be negative");
+            }
+
+            if (createPostDto.Currency.HasValue && !Enum.IsDefined(typeof(Currency), createPostDto.Currency.Value))
+            {
+                return BadRequest("Invalid currency value");
+            }
+
             Post post = createPostDto.ToPostFromCreateDto(userId, createPostDto.CategoryId);
 
             await _postRepository.CreateAsync(post);
@@ -164,6 +179,21 @@ namespace MarketTrustAPI.Controllers
             if (updatePostDto.CategoryId != null && !await _categoryRepository.ExistAsync(updatePostDto.CategoryId.Value))
             {
                 return BadRequest("Category does not exist");
+            }
+
+            if (updatePostDto.Price.HasValue ^ updatePostDto.Currency.HasValue)
+            {
+                return BadRequest("Both Price and Currency must be provided together");
+            }
+
+            if (updatePostDto.Price.HasValue && updatePostDto.Price < 0)
+            {
+                return BadRequest("Price cannot be negative");
+            }
+
+            if (updatePostDto.Currency.HasValue && !Enum.IsDefined(typeof(Currency), updatePostDto.Currency.Value))
+            {
+                return BadRequest("Invalid currency value");
             }
 
             Post? post = await _postRepository.UpdateAsync(id, updatePostDto);

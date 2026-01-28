@@ -52,6 +52,18 @@ namespace MarketTrustAPI.Data
                 .WithMany(u => u.TrustRatingsAsTrustee)
                 .HasForeignKey(tr => tr.TrusteeId)
                 .OnDelete(DeleteBehavior.ClientCascade);
+            
+            string currencyValues = string.Join(", ", Enum.GetValues(typeof(Currency)).Cast<int>());
+            builder.Entity<Post>(b =>
+            {
+                b.Property(p => p.Price).HasPrecision(18, 2);
+
+                b.ToTable(t => 
+                {
+                    t.HasCheckConstraint("CK_Post_Price_NonNegative", "Price IS NULL OR Price >= 0");
+                    t.HasCheckConstraint("CK_Post_Currency_Values", $"Currency IS NULL OR Currency IN ({currencyValues})");
+                });
+            });
         }
     }
 }

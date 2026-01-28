@@ -194,11 +194,15 @@ namespace MarketTrustAPI.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    Currency = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.CheckConstraint("CK_Post_Currency_Values", "Currency IS NULL OR Currency IN (1)");
+                    table.CheckConstraint("CK_Post_Price_NonNegative", "Price IS NULL OR Price >= 0");
                     table.ForeignKey(
                         name: "FK_Posts_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -293,8 +297,8 @@ namespace MarketTrustAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b1dac43b-6489-4520-bc86-50cf98d49cca", "f934c5be-2075-41e8-bc88-35ed0556e91d", "Admin", "ADMIN" },
-                    { "fd1678c0-f787-4c3a-b187-8e03752fe5f6", "63494396-a836-41e6-b540-41a1ea5aadfa", "User", "USER" }
+                    { "59da012c-65aa-4ea7-8073-eb5d0799377f", "5dbc2487-f666-4c73-86b7-94d1d5324c59", "Admin", "ADMIN" },
+                    { "f81fd94f-0994-485d-a8e6-2f4a56bded50", "1e11d611-b084-461b-8f61-4ba50150b78d", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
