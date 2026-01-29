@@ -28,14 +28,34 @@ namespace MarketTrustAPI.Dtos.User
         public string? Email { get; set; }
 
         /// <summary>
+        /// Indicates whether the user's email is publicly visible.
+        /// </summary>
+        public bool IsPublicEmail { get; set; }
+
+        /// <summary>
         /// The phone number of the user.
         /// </summary>
         public string? Phone { get; set; }
 
         /// <summary>
+        /// Indicates whether the user's phone number is publicly visible.
+        /// </summary>
+        public bool IsPublicPhone { get; set; }
+
+        /// <summary>
         /// The geographical location of the user.
         /// </summary>
         public Point? Location { get; set; }
+
+        /// <summary>
+        /// Indicates whether the user's location is publicly visible.
+        /// </summary>
+        public bool IsPublicLocation { get; set; }
+
+        /// <summary>
+        /// Indicates whether the user is pre-trusted (known to be trusted).
+        /// </summary>
+        public bool IsPretrusted { get; set; } = false;
 
         /// <summary>
         /// The posts created by the user.

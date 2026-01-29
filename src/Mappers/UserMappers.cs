@@ -16,8 +16,12 @@ namespace MarketTrustAPI.Mappers
                 Id = user.Id,
                 Name = user.UserName ?? string.Empty,
                 Email = user.IsPublicEmail ? user.Email : null,
+                IsPublicEmail = user.IsPublicEmail,
                 Phone = user.IsPublicPhone ? user.PhoneNumber : null,
+                IsPublicPhone = user.IsPublicPhone,
                 Location = user.IsPublicLocation ? user.Location : null,
+                IsPublicLocation = user.IsPublicLocation,
+                IsPretrusted = user.IsPretrusted,
                 Posts = user.Posts.Select(post => post.ToPostDto()).ToList()
             };
         }
