@@ -46,12 +46,12 @@ namespace MarketTrustAPI.Repository
 
             if (!string.IsNullOrEmpty(getUserDto.Email))
             {
-                users = users.Where(user => !user.IsPublicEmail || EF.Functions.Like(user.Email, $"%{getUserDto.Email}%"));
+                users = users.Where(user => user.IsPublicEmail && EF.Functions.Like(user.Email, $"%{getUserDto.Email}%"));
             }
 
             if (!string.IsNullOrEmpty(getUserDto.Phone))
             {
-                users = users.Where(user => !user.IsPublicPhone || EF.Functions.Like(user.PhoneNumber, $"%{getUserDto.Phone}%"));
+                users = users.Where(user => user.IsPublicPhone && EF.Functions.Like(user.PhoneNumber, $"%{getUserDto.Phone}%"));
             }
 
             return await users.ToListAsync();
