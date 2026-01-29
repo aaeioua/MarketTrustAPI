@@ -9,6 +9,7 @@ using MarketTrustAPI.Interfaces;
 using MarketTrustAPI.Models;
 using MarketTrustAPI.SpatialIndexManager;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite;
 using NetTopologySuite.Geometries;
 
 namespace MarketTrustAPI.Repository
@@ -72,7 +73,8 @@ namespace MarketTrustAPI.Repository
                     _spatialIndexManager.Initialize(users);
                 }
 
-                Point center = new Point(getPostDto.Longitude.Value, getPostDto.Latitude.Value);
+                GeometryFactory geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+                Point center = geometryFactory.CreatePoint(new Coordinate(getPostDto.Longitude.Value, getPostDto.Latitude.Value));
                 HashSet<string> userIdsInRadius = _spatialIndexManager
                     .GetPointsInRadius(center, getPostDto.SearchRadius.Value)
                     .Select(user => user.Id)

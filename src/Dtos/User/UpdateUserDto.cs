@@ -40,9 +40,16 @@ namespace MarketTrustAPI.Dtos.User
         public bool? IsPublicPhone { get; set; }
 
         /// <summary>
-        /// The new location of the user.
+        /// The new longitude of the user's location.
         /// </summary>
-        public Point? Location { get; set; }
+        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180")]
+        public double? Longitude { get; set; }
+
+        /// <summary>
+        /// The new latitude of the user's location.
+        /// </summary>
+        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 and 90")]
+        public double? Latitude { get; set; }
 
         /// <summary>
         /// The new location visibility status of the user.

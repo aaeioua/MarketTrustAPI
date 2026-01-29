@@ -9,6 +9,8 @@ using MarketTrustAPI.Models;
 using MarketTrustAPI.SpatialIndexManager;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace MarketTrustAPI.Repository
 {
@@ -98,9 +100,12 @@ namespace MarketTrustAPI.Repository
             user.IsPublicEmail = updateUserDto.IsPublicEmail ?? user.IsPublicEmail;
             user.PhoneNumber = updateUserDto.Phone ?? user.PhoneNumber;
             user.IsPublicPhone = updateUserDto.IsPublicPhone ?? user.IsPublicPhone;
-            if (updateUserDto.Location != null)
+            if (updateUserDto.Longitude.HasValue && updateUserDto.Latitude.HasValue)
             {
-                user.Location = updateUserDto.Location;
+                GeometryFactory geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+                Point newLocation = geometryFactory.CreatePoint(new Coordinate(updateUserDto.Longitude.Value, updateUserDto.Latitude.Value));
+
+                user.Location = newLocation;
 
                 _spatialIndexManager.Remove(user);
                 _spatialIndexManager.Insert(user);
