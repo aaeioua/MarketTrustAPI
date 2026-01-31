@@ -53,6 +53,11 @@ namespace MarketTrustAPI.Dtos.Post
         public double? D { get; set; }
         
         /// <summary>
+        /// Indicates whether to sort by price in ascending order. If false, sorts in descending order.
+        /// </summary>
+        public bool? IsPriceAscending { get; set; }
+        
+        /// <summary>
         /// Page number for pagination.
         /// </summary>
         [Range(1, int.MaxValue, ErrorMessage = "Page number must be atleast 1")]

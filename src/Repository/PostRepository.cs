@@ -83,6 +83,19 @@ namespace MarketTrustAPI.Repository
                 posts = posts.Where(post => userIdsInRadius.Contains(post.UserId));
             }
 
+            // TODO: Currency conversion
+            if (getPostDto.IsPriceAscending.HasValue)
+            {
+                if (getPostDto.IsPriceAscending.Value)
+                {
+                    posts = posts.OrderBy(post => post.Price);
+                }
+                else
+                {
+                    posts = posts.OrderByDescending(post => post.Price);
+                }
+            }
+
             if (getPostDto.Page.HasValue && getPostDto.PageSize.HasValue)
             {
                 int skip = (getPostDto.Page.Value - 1) * getPostDto.PageSize.Value;
