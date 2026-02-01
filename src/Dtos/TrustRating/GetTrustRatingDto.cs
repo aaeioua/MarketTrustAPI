@@ -15,12 +15,7 @@ namespace MarketTrustAPI.Dtos.TrustRating
         /// The ID of the user who is giving the trust rating.
         /// </summary>
         public string? TrusteeId { get; set; }
-        
-        /// <summary>
-        /// The post ID associated with the trust rating.
-        /// </summary>
-        public int? PostId { get; set; }
-        
+
         /// <summary>
         /// The page number for pagination.
         /// </summary>

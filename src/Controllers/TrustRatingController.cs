@@ -125,11 +125,6 @@ namespace MarketTrustAPI.Controllers
                 return NotFound("Trustee not found");
             }
 
-            if (createTrustRatingDto.PostId != null && !await _postRepository.ExistAsync(createTrustRatingDto.PostId.Value))
-            {
-                return NotFound("Post not found");
-            }
-
             TrustRating trustRating = createTrustRatingDto.ToTrustRatingFromCreateDto(userId);
 
             await _trustRatingRepository.CreateAsync(trustRating);

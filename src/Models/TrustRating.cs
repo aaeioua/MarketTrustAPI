@@ -47,16 +47,6 @@ namespace MarketTrustAPI.Models
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
-        /// The ID of the post associated with this trust rating, if any.
-        /// </summary>
-        public int? PostId { get; set; }
-
-        /// <summary>
-        /// THe post associated with this trust rating, if any.
-        /// </summary>
-        public Post? Post { get; set; }
-
-        /// <summary>
         /// An optional comment for the trust rating.
         /// </summary>
         public string? Comment { get; set; }

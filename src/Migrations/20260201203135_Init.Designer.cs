@@ -13,7 +13,7 @@ using NetTopologySuite.Geometries;
 namespace MarketTrustAPI.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20260124165057_Init")]
+    [Migration("20260201203135_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -163,9 +163,6 @@ namespace MarketTrustAPI.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PostId")
-                        .HasColumnType("int");
-
                     b.Property<double>("TrustValue")
                         .HasColumnType("float");
 
@@ -178,8 +175,6 @@ namespace MarketTrustAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.HasIndex("TrusteeId");
 
@@ -297,15 +292,15 @@ namespace MarketTrustAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "59da012c-65aa-4ea7-8073-eb5d0799377f",
-                            ConcurrencyStamp = "5dbc2487-f666-4c73-86b7-94d1d5324c59",
+                            Id = "6e88fa7d-e4f1-4132-950b-2102f0e7d8a8",
+                            ConcurrencyStamp = "ba57259e-d852-4696-b6e5-204546b6f7d4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f81fd94f-0994-485d-a8e6-2f4a56bded50",
-                            ConcurrencyStamp = "1e11d611-b084-461b-8f61-4ba50150b78d",
+                            Id = "c154cb39-3a75-4292-94a0-43abebaae08d",
+                            ConcurrencyStamp = "2c9fdd02-fd26-4b0c-ad45-8ba957319d57",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -469,10 +464,6 @@ namespace MarketTrustAPI.Migrations
 
             modelBuilder.Entity("MarketTrustAPI.Models.TrustRating", b =>
                 {
-                    b.HasOne("MarketTrustAPI.Models.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId");
-
                     b.HasOne("MarketTrustAPI.Models.User", "Trustee")
                         .WithMany("TrustRatingsAsTrustee")
                         .HasForeignKey("TrusteeId")
@@ -484,8 +475,6 @@ namespace MarketTrustAPI.Migrations
                         .HasForeignKey("TrustorId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.Navigation("Post");
 
                     b.Navigation("Trustee");
 

@@ -184,6 +184,33 @@ namespace MarketTrustAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TrustRatings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrustorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TrusteeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TrustValue = table.Column<double>(type: "float", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrustRatings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TrustRatings_AspNetUsers_TrusteeId",
+                        column: x => x.TrusteeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TrustRatings_AspNetUsers_TrustorId",
+                        column: x => x.TrustorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -259,46 +286,13 @@ namespace MarketTrustAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TrustRatings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TrustorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TrusteeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TrustValue = table.Column<double>(type: "float", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrustRatings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TrustRatings_AspNetUsers_TrusteeId",
-                        column: x => x.TrusteeId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TrustRatings_AspNetUsers_TrustorId",
-                        column: x => x.TrustorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TrustRatings_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "59da012c-65aa-4ea7-8073-eb5d0799377f", "5dbc2487-f666-4c73-86b7-94d1d5324c59", "Admin", "ADMIN" },
-                    { "f81fd94f-0994-485d-a8e6-2f4a56bded50", "1e11d611-b084-461b-8f61-4ba50150b78d", "User", "USER" }
+                    { "6e88fa7d-e4f1-4132-950b-2102f0e7d8a8", "ba57259e-d852-4696-b6e5-204546b6f7d4", "Admin", "ADMIN" },
+                    { "c154cb39-3a75-4292-94a0-43abebaae08d", "2c9fdd02-fd26-4b0c-ad45-8ba957319d57", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -363,11 +357,6 @@ namespace MarketTrustAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PropertyValues_PostId",
                 table: "PropertyValues",
-                column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TrustRatings_PostId",
-                table: "TrustRatings",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(

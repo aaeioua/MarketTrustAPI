@@ -24,11 +24,6 @@ namespace MarketTrustAPI.Dtos.TrustRating
         public double TrustValue { get; set; }
 
         /// <summary>
-        /// The ID of the post associated with the trust rating.
-        /// </summary>
-        public int? PostId { get; set; }
-
-        /// <summary>
         /// An optional comment about the trust rating.
         /// </summary>
         public string? Comment { get; set; }

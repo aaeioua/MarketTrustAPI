@@ -18,7 +18,6 @@ namespace MarketTrustAPI.Mappers
                 TrusteeId = trustRating.TrusteeId,
                 TrustValue = trustRating.TrustValue,
                 CreatedAt = trustRating.CreatedAt,
-                PostId = trustRating.PostId,
                 Comment = trustRating.Comment
             };
         }
@@ -31,7 +30,6 @@ namespace MarketTrustAPI.Mappers
                 TrusteeId = createTrustRatingDto.TrusteeId,
                 TrustValue = createTrustRatingDto.TrustValue,
                 CreatedAt = DateTime.Now,
-                PostId = createTrustRatingDto.PostId,
                 Comment = createTrustRatingDto.Comment
             };
         }
