@@ -33,7 +33,7 @@ namespace MarketTrustAPI.Controllers
         }
 
         /// <summary>
-        /// Gets all users based on the filteres.
+        /// Gets all users based on the filters.
         /// </summary>
         /// <param name="getUserDto">The filters for retrieving users.</param>
         /// <returns>A list of users matching the filters.</returns>

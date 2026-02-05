@@ -181,11 +181,6 @@ namespace MarketTrustAPI.Controllers
                 return BadRequest("Category does not exist");
             }
 
-            if (updatePostDto.Price.HasValue ^ updatePostDto.Currency.HasValue)
-            {
-                return BadRequest("Both Price and Currency must be provided together");
-            }
-
             if (updatePostDto.Price.HasValue && updatePostDto.Price < 0)
             {
                 return BadRequest("Price cannot be negative");

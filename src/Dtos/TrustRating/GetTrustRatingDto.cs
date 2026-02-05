@@ -12,7 +12,7 @@ namespace MarketTrustAPI.Dtos.TrustRating
     public class GetTrustRatingDto
     {
         /// <summary>
-        /// The ID of the user who is giving the trust rating.
+        /// The ID of the user being rated.
         /// </summary>
         public string? TrusteeId { get; set; }
 
