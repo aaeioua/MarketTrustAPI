@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpatialIndexManagerTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReputationManagerTests", "tests\ReputationManagerTests\ReputationManagerTests.csproj", "{763271EC-9011-480E-8BCE-5CAC72832223}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerTests", "tests\ControllerTests\ControllerTests.csproj", "{51218689-60B2-4426-8181-EAD0AB92B5EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +34,14 @@ Global
 		{763271EC-9011-480E-8BCE-5CAC72832223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{763271EC-9011-480E-8BCE-5CAC72832223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{763271EC-9011-480E-8BCE-5CAC72832223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51218689-60B2-4426-8181-EAD0AB92B5EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51218689-60B2-4426-8181-EAD0AB92B5EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51218689-60B2-4426-8181-EAD0AB92B5EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51218689-60B2-4426-8181-EAD0AB92B5EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D63079EE-FA45-4DFC-9FC2-48BDF972D8F4} = {48F039B8-A43A-4043-9E06-B30E4262CE4C}
 		{763271EC-9011-480E-8BCE-5CAC72832223} = {48F039B8-A43A-4043-9E06-B30E4262CE4C}
+		{51218689-60B2-4426-8181-EAD0AB92B5EA} = {48F039B8-A43A-4043-9E06-B30E4262CE4C}
 	EndGlobalSection
 EndGlobal

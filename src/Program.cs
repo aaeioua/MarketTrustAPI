@@ -142,9 +142,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// https://stackoverflow.com/a/73896840
-using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+if (!app.Environment.IsEnvironment("Testing"))
 {
+    // https://stackoverflow.com/a/73896840
+    using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
     var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     var db = serviceScope.ServiceProvider.GetRequiredService<ApplicationDBContext>().Database;
 
@@ -177,3 +178,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program;

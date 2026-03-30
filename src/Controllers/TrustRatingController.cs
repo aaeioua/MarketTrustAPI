@@ -21,19 +21,16 @@ namespace MarketTrustAPI.Controllers
     {
         private readonly ITrustRatingRepository _trustRatingRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IPostRepository _postRepository;
 
         /// <summary>
         /// Constructs a new TrustRatingController.
         /// </summary>
         /// <param name="trustRatingRepository">The trust rating repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        /// <param name="postRepository">The post repository.</param>
-        public TrustRatingController(ITrustRatingRepository trustRatingRepository, IUserRepository userRepository, IPostRepository postRepository)
+        public TrustRatingController(ITrustRatingRepository trustRatingRepository, IUserRepository userRepository)
         {
             _trustRatingRepository = trustRatingRepository;
             _userRepository = userRepository;
-            _postRepository = postRepository;
         }
 
         /// <summary>
