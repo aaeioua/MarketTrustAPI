@@ -21,6 +21,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 	public SignInManager<User> SignInManager { get; private set; } = CreateSignInManager();
 	public ITokenService TokenService { get; private set; } = Substitute.For<ITokenService>();
 	public ISpatialIndexManager<User> SpatialIndexManager { get; private set; } = Substitute.For<ISpatialIndexManager<User>>();
+	public IUserRepository UserRepository { get; private set; } = Substitute.For<IUserRepository>();
 
 	public void ResetSubstitutes()
 	{
@@ -28,6 +29,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 		SignInManager = CreateSignInManager();
 		TokenService = Substitute.For<ITokenService>();
 		SpatialIndexManager = Substitute.For<ISpatialIndexManager<User>>();
+		UserRepository = Substitute.For<IUserRepository>();
 	}
 
 	protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -47,15 +49,25 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
 		builder.ConfigureTestServices(services =>
 		{
+			services.AddAuthentication(options =>
+			{
+				options.DefaultAuthenticateScheme = TestAuthHandler.SchemeName;
+				options.DefaultChallengeScheme = TestAuthHandler.SchemeName;
+			})
+			.AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(TestAuthHandler.SchemeName,
+                options => { });
+
 			services.RemoveAll<UserManager<User>>();
 			services.RemoveAll<SignInManager<User>>();
 			services.RemoveAll<ITokenService>();
 			services.RemoveAll<ISpatialIndexManager<User>>();
+			services.RemoveAll<IUserRepository>();
 
 			services.AddScoped(_ => UserManager);
 			services.AddScoped(_ => SignInManager);
 			services.AddScoped(_ => TokenService);
 			services.AddScoped(_ => SpatialIndexManager);
+			services.AddScoped(_ => UserRepository);
 		});
 	}
 
