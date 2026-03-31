@@ -22,6 +22,9 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 	public ITokenService TokenService { get; private set; } = Substitute.For<ITokenService>();
 	public ISpatialIndexManager<User> SpatialIndexManager { get; private set; } = Substitute.For<ISpatialIndexManager<User>>();
 	public IUserRepository UserRepository { get; private set; } = Substitute.For<IUserRepository>();
+	public IReputationService ReputationService { get; private set; } = Substitute.For<IReputationService>();
+	public IReputationRepository ReputationRepository { get; private set; } = Substitute.For<IReputationRepository>();
+	public ITrustRatingRepository TrustRatingRepository { get; private set; } = Substitute.For<ITrustRatingRepository>();
 
 	public void ResetSubstitutes()
 	{
@@ -30,6 +33,9 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 		TokenService = Substitute.For<ITokenService>();
 		SpatialIndexManager = Substitute.For<ISpatialIndexManager<User>>();
 		UserRepository = Substitute.For<IUserRepository>();
+		ReputationService = Substitute.For<IReputationService>();
+		ReputationRepository = Substitute.For<IReputationRepository>();
+		TrustRatingRepository = Substitute.For<ITrustRatingRepository>();
 	}
 
 	protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -62,12 +68,18 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 			services.RemoveAll<ITokenService>();
 			services.RemoveAll<ISpatialIndexManager<User>>();
 			services.RemoveAll<IUserRepository>();
+			services.RemoveAll<IReputationService>();
+			services.RemoveAll<IReputationRepository>();
+			services.RemoveAll<ITrustRatingRepository>();
 
 			services.AddScoped(_ => UserManager);
 			services.AddScoped(_ => SignInManager);
 			services.AddScoped(_ => TokenService);
 			services.AddScoped(_ => SpatialIndexManager);
 			services.AddScoped(_ => UserRepository);
+			services.AddScoped(_ => ReputationService);
+			services.AddScoped(_ => ReputationRepository);
+			services.AddScoped(_ => TrustRatingRepository);
 		});
 	}
 
