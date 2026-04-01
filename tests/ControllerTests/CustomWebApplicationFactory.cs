@@ -25,6 +25,8 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 	public IReputationService ReputationService { get; private set; } = Substitute.For<IReputationService>();
 	public IReputationRepository ReputationRepository { get; private set; } = Substitute.For<IReputationRepository>();
 	public ITrustRatingRepository TrustRatingRepository { get; private set; } = Substitute.For<ITrustRatingRepository>();
+	public ICategoryRepository CategoryRepository { get; private set; } = Substitute.For<ICategoryRepository>();
+	public IPostRepository PostRepository { get; private set; } = Substitute.For<IPostRepository>();
 
 	public void ResetSubstitutes()
 	{
@@ -36,6 +38,8 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 		ReputationService = Substitute.For<IReputationService>();
 		ReputationRepository = Substitute.For<IReputationRepository>();
 		TrustRatingRepository = Substitute.For<ITrustRatingRepository>();
+		CategoryRepository = Substitute.For<ICategoryRepository>();
+		PostRepository = Substitute.For<IPostRepository>();
 	}
 
 	protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -71,6 +75,8 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 			services.RemoveAll<IReputationService>();
 			services.RemoveAll<IReputationRepository>();
 			services.RemoveAll<ITrustRatingRepository>();
+			services.RemoveAll<ICategoryRepository>();
+			services.RemoveAll<IPostRepository>();
 
 			services.AddScoped(_ => UserManager);
 			services.AddScoped(_ => SignInManager);
@@ -80,6 +86,8 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 			services.AddScoped(_ => ReputationService);
 			services.AddScoped(_ => ReputationRepository);
 			services.AddScoped(_ => TrustRatingRepository);
+			services.AddScoped(_ => CategoryRepository);
+			services.AddScoped(_ => PostRepository);
 		});
 	}
 
