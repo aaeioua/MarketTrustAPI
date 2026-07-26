@@ -52,6 +52,12 @@ namespace MarketTrustAPI.Data
                 .WithMany(u => u.TrustRatingsAsTrustee)
                 .HasForeignKey(tr => tr.TrusteeId)
                 .OnDelete(DeleteBehavior.ClientCascade);
+
+            builder.Entity<TrustRating>()
+                .HasOne(tr => tr.Post)
+                .WithMany(p => p.TrustRatings)
+                .HasForeignKey(tr => tr.PostId)
+                .OnDelete(DeleteBehavior.SetNull);
             
             string currencyValues = string.Join(", ", Enum.GetValues(typeof(Currency)).Cast<int>());
             builder.Entity<Post>(b =>

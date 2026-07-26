@@ -21,16 +21,19 @@ namespace MarketTrustAPI.Controllers
     {
         private readonly ITrustRatingRepository _trustRatingRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IPostRepository _postRepository;
 
         /// <summary>
         /// Constructs a new TrustRatingController.
         /// </summary>
         /// <param name="trustRatingRepository">The trust rating repository.</param>
         /// <param name="userRepository">The user repository.</param>
-        public TrustRatingController(ITrustRatingRepository trustRatingRepository, IUserRepository userRepository)
+        /// <param name="postRepository">The post repository.</param>
+        public TrustRatingController(ITrustRatingRepository trustRatingRepository, IUserRepository userRepository, IPostRepository postRepository)
         {
             _trustRatingRepository = trustRatingRepository;
             _userRepository = userRepository;
+            _postRepository = postRepository;
         }
 
         /// <summary>
@@ -120,6 +123,11 @@ namespace MarketTrustAPI.Controllers
             if (!await _userRepository.ExistAsync(createTrustRatingDto.TrusteeId))
             {
                 return NotFound("Trustee not found");
+            }
+
+            if (createTrustRatingDto.PostId.HasValue && !await _postRepository.ExistAsync(createTrustRatingDto.PostId.Value))
+            {
+                return NotFound("Post not found");
             }
 
             TrustRating trustRating = createTrustRatingDto.ToTrustRatingFromCreateDto(userId);

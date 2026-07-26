@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +46,16 @@ namespace MarketTrustAPI.Models
         /// The time of creation.
         /// </summary>
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// The ID of the post associated with the trust rating, if any.
+        /// </summary>
+        public int? PostId { get; set; }
+
+        /// <summary>
+        /// The post associated with the trust rating, if any.
+        /// </summary>
+        public Post? Post { get; set; }
 
         /// <summary>
         /// An optional comment for the trust rating.

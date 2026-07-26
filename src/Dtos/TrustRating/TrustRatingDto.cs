@@ -36,7 +36,12 @@ namespace MarketTrustAPI.Dtos.TrustRating
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
-        /// The post associated with this trust rating, if any.
+        /// The ID of the post associated with the trust rating, if any.
+        /// </summary>
+        public int? PostId { get; set; }
+
+        /// <summary>
+        /// The comment associated with this trust rating, if any.
         /// </summary>
         public string? Comment { get; set; }
     }

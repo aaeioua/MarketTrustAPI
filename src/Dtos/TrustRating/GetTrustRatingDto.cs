@@ -17,6 +17,11 @@ namespace MarketTrustAPI.Dtos.TrustRating
         public string? TrusteeId { get; set; }
 
         /// <summary>
+        /// The ID of the post associated with the trust rating.
+        /// </summary>
+        public int? PostId { get; set; }
+
+        /// <summary>
         /// The page number for pagination.
         /// </summary>
         [Range(1, int.MaxValue, ErrorMessage = "Page number must be at least 1")]

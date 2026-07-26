@@ -74,6 +74,11 @@ namespace MarketTrustAPI.Models
         public Currency? Currency { get; set; }
 
         /// <summary>
+        /// The trust ratings associated with the post.
+        /// </summary>
+        public List<TrustRating> TrustRatings { get; set; } = new List<TrustRating>();
+
+        /// <summary>
         /// Gets the geographical location of the author of the post.
         /// </summary>
         /// <returns>The author's location as a <see cref="Point"/>.</returns>

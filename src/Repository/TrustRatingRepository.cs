@@ -33,7 +33,7 @@ namespace MarketTrustAPI.Repository
         /// <inheritdoc />
         public async Task<List<TrustRating>> GetAllAsync(GetTrustRatingDto getTrustRatingDto, string trustorId)
         {
-            IQueryable<TrustRating> trustRatings = _context.TrustRatings.AsQueryable();
+            IQueryable<TrustRating> trustRatings = _context.TrustRatings.Include(tr => tr.Post);
 
             if (!string.IsNullOrEmpty(trustorId))
             {
@@ -43,6 +43,11 @@ namespace MarketTrustAPI.Repository
             if (!string.IsNullOrEmpty(getTrustRatingDto.TrusteeId))
             {
                 trustRatings = trustRatings.Where(tr => tr.TrusteeId == getTrustRatingDto.TrusteeId);
+            }
+
+            if (getTrustRatingDto.PostId.HasValue)
+            {
+                trustRatings = trustRatings.Where(tr => tr.PostId == getTrustRatingDto.PostId.Value);
             }
 
             if (getTrustRatingDto.Page.HasValue && getTrustRatingDto.PageSize.HasValue)

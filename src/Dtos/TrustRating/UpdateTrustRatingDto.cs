@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace MarketTrustAPI.Dtos.TrustRating
         /// <summary>
         /// The new trust value.
         /// </summary>
+        [Range(0, 5, ErrorMessage = "Trust value must be between 0 and 5.")]
         public double? TrustValue { get; set; }
 
         /// <summary>
